@@ -34,6 +34,6 @@ jobs:
       - name: Deploy to GitHub Pages
         if: success()
         run: |
-          git config --global user.email "maleeshas.2000@gmail.com"
-          git config --global user.name "maleeshaaa"
-          git push -f https://${{ secrets.GH_PAT }}@github.com/maleeshaaa/CTSE_Assignment_02.git main
+          git config --global user.email "it21108990@my.sliit.lk"
+          git config --global user.name "kaveenexe"
+          git push -f https://${{ secrets.GH_PAT }}@github.com/kaveenexe/CTSE_Assignment_02.git main
