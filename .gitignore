@@ -1,0 +1,31 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Node.js specific
+node_modules/
+
+# Environment variables
+
+# Logs and debug files
+*.log
+*.debug
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# User-specific files
+.idea/
+*.iml
+*.vscode/
+
+# Build output
+build/
+dist/
+
+# Dependency management files
+package-lock.json
+yarn.lock
+
+# Temporary files
+.temp/
+.cache/

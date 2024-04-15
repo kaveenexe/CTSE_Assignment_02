@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main] # Trigger the workflow on pushes to the main branch
+  pull_request:
+    branches: [main] # Trigger the workflow on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./server   # Specify the directory where package.json exists
