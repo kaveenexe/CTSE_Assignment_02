@@ -23,3 +23,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
         working-directory: ./server   # Specify the directory where package.json exists
+      - name: Run Unit Tests
+        run: npm test
+        working-directory: ./server 

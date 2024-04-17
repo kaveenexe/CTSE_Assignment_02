@@ -120,7 +120,7 @@ const updateEvent = async (req, res) => {
     await event.save();
 
     // Send success message
-    res.json({ message: "Event registration updated successfully", event });
+    res.status(200).json({ message: "Event registration updated successfully", event });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
