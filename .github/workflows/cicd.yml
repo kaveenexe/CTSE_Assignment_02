@@ -1,0 +1,31 @@
+name: CICD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+      - name: Build docker image
+        run: docker build -t kaveendev/ctse-assignment .
+      - name: Publish image to docker hub
+        run: docker push kaveendev/ctse-assignment:latest
+        
+  deploy:
+    needs: build
+    runs-on: [ms-property-listings-api-production-server-aws-ec2]
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull kaveendev/ctse-assignment:latest
+      - name: Delete old container
+        run: docker rm -f ctse-assignment-container
+      - name: Run docker container
+        run: docker run -d -p 3000:3000 --name ms-property-listings-api-container kaveendev/ctse-assignment
