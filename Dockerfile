@@ -1,20 +1,7 @@
-# Use the official Node.js image as the base
-FROM node:17-alpine
-
-# Set the working directory inside the container
-WORKDIR /server/app
-
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install dependencies
+FROM node:20.12.2
+WORKDIR /app/server    
+COPY server/package.json ./
 RUN npm install
-
-# Copy the rest of the application code to the working directory
-COPY . .
-
-# Expose port 5000
+COPY server/ .
 EXPOSE 5000
-
-# Define the command to run the application
-CMD ["node", "server.js"]
+CMD ["npm","run","start"]
