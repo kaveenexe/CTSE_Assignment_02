@@ -28,4 +28,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f ctse-assignment-container
       - name: Run docker container
-        run: docker run -d -p 3000:3000 --name ms-property-listings-api-container kaveendev/ctse-assignment
+        run: docker run -d -p 5000:5000 --name ctse-assignment-container kaveendev/ctse-assignment
