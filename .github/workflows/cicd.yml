@@ -21,7 +21,7 @@ jobs:
         
   deploy:
     needs: build
-    runs-on: [ip-172-31-81-198]
+    runs-on: self-hosted
     steps:
       - name: Pull image from docker hub
         run: docker pull kaveendev/ctse-assignment:latest
