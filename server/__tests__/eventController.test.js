@@ -218,9 +218,9 @@ describe("Event Controller Tests", () => {
     test("should return 404 status code with error message when event is not found", async () => {
       const req = mockRequest({}, { id: "nonExistingId" });
       const res = mockResponse();
-      Event.findByIdAndDelete.mockResolvedValueOnce({ _id: "existingEventId" }); // Intentionally resolving with a value to simulate success instead of null
+      Event.findByIdAndDelete.mockResolvedValueOnce(null);
       await deleteEvent(req, res);
-      expect(res.status).toHaveBeenCalledWith(404); // Intentionally expecting a different status code
+      expect(res.status).toHaveBeenCalledWith(404);
       expect(res.json).toHaveBeenCalledWith({ error: "Event not found" });
     });
 
