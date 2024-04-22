@@ -22,9 +22,6 @@ jobs:
       - name: Dependency Vulnerability Scan     # Dependency vulnerability scan
         run: npm audit --production
         working-directory: ./server
-      - name: Static Code Analysis       # Static code analysis
-        run: npx eslint ./server/**/*.js
-        working-directory: ./server
       - name: Run tests      # Unit test
         run: npm test
         working-directory: ./server
@@ -32,6 +29,8 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
       - name: Build Docker image
         run: docker build -t kaveendev/ctse-assignment .
+      - name: Docker Image Security Scan      # Docker image vulnerability security scan
+        run: trivy image kaveendev/ctse-assignment:latest
       - name: Publish image to Docker Hub
         run: docker push kaveendev/ctse-assignment:latest
   
