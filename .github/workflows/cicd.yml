@@ -12,20 +12,28 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-      - name: Login to docker hub
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
-      - name: Build docker image
+      - name: Build Docker image
         run: docker build -t kaveendev/ctse-assignment .
-      - name: Publish image to docker hub
+      - name: Publish image to Docker Hub
         run: docker push kaveendev/ctse-assignment:latest
         
   deploy:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Pull image from docker hub
+      - name: Pull image from Docker Hub
         run: docker pull kaveendev/ctse-assignment:latest
       - name: Delete old container
         run: docker rm -f ctse-assignment-container
-      - name: Run docker container
+      - name: Run Docker container
         run: docker run -d -p 5000:5000 --name ctse-assignment-container kaveendev/ctse-assignment
