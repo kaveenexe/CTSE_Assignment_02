@@ -1,23 +1,24 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-
 const dbConnect = () => {
   const connectionParams = { useNewUrlParser: true, useUnifiedTopology: true };
   mongoose.connect(process.env.MONGO_URL, connectionParams);
 
-  // Listens to the MongoDB event "connected"
+  //listens to the mongodb event "connected"
   mongoose.connection.on("connected", () => {
     console.log("Connected to database successfully");
   });
 
-  // Listens to the MongoDB event "error"
+  //listens to the mongodb event "error"
   mongoose.connection.on("error", (err) => {
     console.log("Error while connecting to database:" + err);
   });
 
-  // Listens to the MongoDB event "disconnected"
+  //listens to the mongodb event "disconnected"
   mongoose.connection.on("disconnected", () => {
-    console.log("MongoDB connection disconnected");
+    console.log("Mongodb connection disconnected");
   });
 };
 
