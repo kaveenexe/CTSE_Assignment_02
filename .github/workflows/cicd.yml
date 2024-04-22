@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
+
   build:
     runs-on: [ubuntu-latest]
     steps:
@@ -36,6 +36,10 @@ jobs:
           echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
           sudo apt-get update
           sudo apt-get install trivy
+      - name: Set up environment variables
+        env:
+          MONGO_URL: ${{ secrets.MONGO_URL }}
+        run: echo "MONGO_URL=$MONGO_URL" >> $GITHUB_ENV
       - name: Install dependencies
         run: npm install
         working-directory: ./server
