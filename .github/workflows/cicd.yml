@@ -59,7 +59,7 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Pull image from Docker Hub
+      - name: Pull image from Docker Hub  # pull docker image
         run: docker pull kaveendev/ctse-assignment:latest
       - name: Delete old container
         run: docker rm -f ctse-assignment-container
