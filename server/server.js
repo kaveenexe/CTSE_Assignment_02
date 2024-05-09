@@ -27,8 +27,8 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
-        description: "Local server",
+        url: "http://13.60.80.168:5000",
+        description: "AWS server",
       },
     ],
   },
